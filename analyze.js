@@ -1,13 +1,13 @@
-const crawler = require('./crawler.js');
 
-//const comments = crawler.loadComms('JuicyJay')
 
-function containsPunc(comment) {
+
+
+const containsPunc =  (comment) => {
     return ((comment.indexOf('.') > 0) || (comment.indexOf('?') > 0) || (comment.indexOf('!') > 0))
 
 }
 
-function containsPuncArr(comment) {
+const containsPuncArr = (comment) => {
     for (var i = 0; i < comment.length; i++) {
         if ((comment[i].indexOf('.') > 0) || (comment[i].indexOf('?') > 0) || (comment[i].indexOf('!') > 0)) {
             return true
@@ -16,8 +16,28 @@ function containsPuncArr(comment) {
     }
     return false
 }
+function removeEmptyArr(arr){
+    for(var i = 0; i < arr.length; i++){
+        if (arr[i] === ""){
+            var temp = arr;
+            temp.splice(i, 1)
+            return temp;
+        }
+    }
+}
 
-function breakUpSentences(comment) {
+const newLines = (comment) => {
+    var temp = comment;
+    var count = 0;
+    var indx = 0;
+    while(temp.indexOf("\n", indx) >= 0){
+        indx = temp.indexOf("\n",indx) + 1;
+        count++;
+    }
+    return count;
+}
+
+const breakUpSentences = (comment) => {
 
     var temp = comment.substring(0);
     var splitString = []
@@ -29,7 +49,7 @@ function breakUpSentences(comment) {
             temp = temp.replace('!', '~')
         }
         splitString = temp.split('~')
-        return splitString;
+        return removeEmptyArr(splitString);
     }
     return comment;
 }
@@ -124,9 +144,8 @@ return results;*/
 
 
 
-
 //determines the different sentence lengths
-function sentenceWordLength(comment) {
+const sentenceWordLength = (comment) => {
     var senLength = 0;
     var num = 0;
     let sentences = breakUpSentences(comment);
@@ -141,7 +160,8 @@ function sentenceWordLength(comment) {
 }
 
 
-function sizeOfWordsPerSentence(sentence) {
+
+const sizeOfWordsPerSentence = (sentence) => {
     let iterated = sentence.split(' ')
     var total = 0;
     var num = 0;
@@ -161,11 +181,12 @@ function sizeOfWordsPerSentence(sentence) {
 
 
 
-function commentCharLength(comment) {
+
+const commentCharLength = (comment) => {
     return comment.length;
 }
 
-function numberOfWordsPerComment(comment) {
+const numberOfWordsPerComment = (comment) => {
     let sentences = breakUpSentences(comment);
     var amount = 0;
     var words = 0;
@@ -179,8 +200,9 @@ function numberOfWordsPerComment(comment) {
 }
 
 
+
 //May be useless, who knows
-function properPunctuationRatio(comment) {
+const properPunctuationRatio = (comment) => {
     let numChars = commentCharLength(comment);
     var commas = 0;
     var apost = 0;
@@ -217,4 +239,14 @@ function properPunctuationRatio(comment) {
     return numChars/(apost + quotes + parenth + comma)
 }
 
-console.log(numberOfWordsPerComment('Reba sink a boulder in the water. Reba tie a cable to a tree.'))
+
+exports.properPunctuationRatio = properPunctuationRatio
+exports.sentenceWordLength = sentenceWordLength
+exports.sizeOfWordsPerSentence = sizeOfWordsPerSentence
+exports.containsPuncArr = containsPuncArr
+exports.breakUpSentences = breakUpSentences
+exports.commentCharLength = commentCharLength
+exports.numberOfWordsPerComment = numberOfWordsPerComment
+exports.containsPunc = containsPunc
+
+exports.newLines = newLines

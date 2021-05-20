@@ -1,16 +1,29 @@
 {
-  "name": "red-bot",
+  "name": "y",
   "version": "1.0.0",
   "description": "reddit bot for pulling user comments",
-  "main": "crawler.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index App()"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Justin Hild",
+  "license": "MIT",
   "dependencies": {
     "redddit": "^1.1.0",
     "reddit": "^1.2.1",
     "snoowrap": "^1.23.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jhild737/Word_Analyzer.git"
+  },
+  "keywords": [
+    "crawl"
+  ],
+  "bugs": {
+    "url": "https://github.com/Jhild737/Word_Analyzer/issues"
+  },
+  "homepage": "https://github.com/Jhild737/Word_Analyzer#readme"
 }

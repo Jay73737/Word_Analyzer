@@ -1,12 +1,14 @@
 
 
 
-
+//helper function to determine if a whole comment has any end of sentence characters
 const containsPunc =  (comment) => {
     return ((comment.indexOf('.') > 0) || (comment.indexOf('?') > 0) || (comment.indexOf('!') > 0))
 
 }
 
+
+//helper function that determines if there is end of sentence in an array of words
 const containsPuncArr = (comment) => {
     for (var i = 0; i < comment.length; i++) {
         if ((comment[i].indexOf('.') > 0) || (comment[i].indexOf('?') > 0) || (comment[i].indexOf('!') > 0)) {
@@ -16,6 +18,8 @@ const containsPuncArr = (comment) => {
     }
     return false
 }
+
+//bug caused extra empty object to be added at the end of the comment arrays, this removes that object
 function removeEmptyArr(arr){
     for(var i = 0; i < arr.length; i++){
         if (arr[i] === ""){
@@ -24,8 +28,10 @@ function removeEmptyArr(arr){
             return temp;
         }
     }
+    return arr
 }
 
+//counts how many new line characters used in a comment
 const newLines = (comment) => {
     var temp = comment;
     var count = 0;
@@ -36,7 +42,7 @@ const newLines = (comment) => {
     }
     return count;
 }
-
+//Replaces end of sentence characters with ~, need to find a different character at some point.
 const breakUpSentences = (comment) => {
 
     var temp = comment.substring(0);
@@ -51,12 +57,16 @@ const breakUpSentences = (comment) => {
         splitString = temp.split('~')
         return removeEmptyArr(splitString);
     }
-    return comment;
+    return temp;
 }
 
-
-const upvoteRatio = (comment) => {
-
+//calculates the average of score/comments 
+const upvoteRatio = (voteArr) => {
+    let total = 0
+    for(var t in voteArr){
+        total += voteArr
+    }
+    return total/voteArr.length
 }
 
 
@@ -203,7 +213,7 @@ const properPunctuationRatio = (comment) => {
     return numChars/(apost + quotes + parenth + comma)
 }
 
-
+exports.upvoteRatio = upvoteRatio
 exports.properPunctuationRatio = properPunctuationRatio
 exports.sentenceWordLength = sentenceWordLength
 exports.sizeOfWordsPerSentence = sizeOfWordsPerSentence

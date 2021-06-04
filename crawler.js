@@ -12,10 +12,10 @@ class Crawler {
     constructor(username) {
        this.mainGuy = new snoowrap({
             userAgent: 'Sentence_Analyze',
-            clientId: 'xfpJp6P3TpEM_w',
-            clientSecret: 'dY6u73NLJISHvsJe5ZPn2QcZNZHsHg',
-            username: 'JuicyJay',
-            password: 'Lacr0ssE7'
+            clientId: 't-s457eG5h63rg',
+            clientSecret: 'b82SSIvgbz6ZKmyG7oj3Nm7Fed7D3g',
+            username: 'Is_it_them_bot',
+            password: 'Is1tTh3mB0+'
           });
           
         this.lookupName = username;
@@ -55,8 +55,9 @@ class Crawler {
       */
 
      let res = await temp;
+     let score = await votes;
      value(res);
-     return res;
+     return res, score;
     }
     
 }

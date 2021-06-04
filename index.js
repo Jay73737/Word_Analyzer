@@ -19,9 +19,12 @@ async function main(){
     for (let br of response){
         console.log(analyze.breakUpSentences(br));
     }
+    
      
     analyze.newLines(response[12]);
-
+    console.log(analyze.sentenceWordLength(response[0]));
+    console.log(analyze.sizeOfWordsPerSentence('h\'y. wh\'ats. u\'p. y\'ou, ar\'e, a\', lo\'ser, je\'? a\'sd? as\'d!!!'));
+    console.log(analyze.apostrophePerWord('h\'y. wh\'ats. up. y\'ou, ar\'e, a\', lo\'ser, je\'? a\'sd? as\'d!!!'));
 }
 
 

@@ -53,95 +53,11 @@ const breakUpSentences = (comment) => {
     }
     return comment;
 }
-/*   if (splitString.length > 1){
-       periodLoc = splitString[index].indexOf('.')
-       exclLoc = splitString[index].indexOf('!')
-       questLoc = splitString[index].indexOf('?')
-   }
-  // console.log('kkkk ' + temp)
-   
-   var symbol
-   if (periodLoc > 0){
-       symbol = '.';
-   }else if (exclLoc > 0){
-       symbol = '!';
-   }else if (questLoc > 0) {
-       symbol = '?';
-   } else {
-       results.push(comment);
-       return results;
-   }
-       
-   if ((periodLoc > 0)|| (exclLoc > 0) || (questLoc > 0)){ 
-       splitString = temp.split('.');
-       temp = 
-       console.log('if ' + splitString)
-       if (containsPuncArr(splitString)){
-           
-           var tString = splitString
-           var t = ""
-           for (var i = 0; i < tString.length; i++){
-               console.log(tString)
-               
-               if (containsPunc(tString[i])){
-                   
-                   for (var j = 0; j < tString.length; j++){
-                       
-                       if (!containsPunc(tString[j])){
-                           
-                           results.push(tString[j])
-                           tString.splice(j,1);
-                           if ((j > 0) && (tString.length > 1))
-                               j--;
-                           
-                       }
-                   }
-                   t = ""
-                   
-                   
-                   
-                 //  results.push(breakUpSentences(tString[i]))
-                   
-                   
-                   
-                   console.log('isfdsf ' + tString)                        
-                   
-               } else {
-                   console.log('else: ' + tString)
-                   results.push(tString[i])
-                   tString.splice(i, 1)
 
-                   console.log('else: ' + tString[i])
-                   i=0
-                   
-                   
-               }
-               for(var k = 0; k < tString.length; k++){
-                   t += tString[k]
-               }
-               temp = t;
-               
-               
-           } 
-          
-           
-       } else {
-           t = ""
-           for(var k = 0; k < splitString.length; k++){
-               if (splitString[k] != "")
-                   t += splitString[k];
-           }
-           temp = t;
-       }
-   } else {results.push(comment)
-      return results }
 
-      
-} 
- 
-results.push(temp)
-return results;*/
+const upvoteRatio = (comment) => {
 
+}
 
 
 //determines the different sentence lengths
@@ -159,10 +75,46 @@ const sentenceWordLength = (comment) => {
     return senLength / num;
 }
 
+function replaceAllBlank(comment, character, replacement) {
+    var temp = comment;
+    while(temp.indexOf(character) >= 0)
+        temp = temp.replace(character, replacement);
+    return temp;
+}
+
+function trimNonWords(comment){
+    var temp = comment;
+    temp = replaceAllBlank(temp, '.', '');
+    temp = replaceAllBlank(temp, ',', '');
+    temp = replaceAllBlank(temp, '?', '');
+    temp = replaceAllBlank(temp, '\"', '');
+    temp = replaceAllBlank(temp, '!', '');
+    temp = replaceAllBlank(temp, '/', '');
+    temp = replaceAllBlank(temp, '(', '');
+    temp = replaceAllBlank(temp, ')', '');
+    temp = replaceAllBlank(temp, ';', '');
+    temp = replaceAllBlank(temp, ':', '');
+    temp = replaceAllBlank(temp, '#', '');
+    temp = replaceAllBlank(temp, '=', '');
+    temp = replaceAllBlank(temp, '-', '');
+    temp = replaceAllBlank(temp, '$', '');
+    temp = replaceAllBlank(temp, ']', '');
+    temp = replaceAllBlank(temp, '[', '');
+    temp = replaceAllBlank(temp, '&', '');
+    temp = replaceAllBlank(temp, '^', '');
+    temp = replaceAllBlank(temp, '%', '');
+    temp = replaceAllBlank(temp, '@', '');
+    temp = replaceAllBlank(temp, '~', '');
+    temp = replaceAllBlank(temp, '+', '');
+    temp = replaceAllBlank(temp, '<', '');
+    temp = replaceAllBlank(temp, '>', '');
+    return temp;
+}
 
 
 const sizeOfWordsPerSentence = (sentence) => {
-    let iterated = sentence.split(' ')
+    let iterated = trimNonWords(sentence);
+    iterated = iterated.split(' ');
     var total = 0;
     var num = 0;
     for (var i = 0; i < iterated.length; i++) {
@@ -177,6 +129,17 @@ const sizeOfWordsPerSentence = (sentence) => {
         return total / num
         
     
+}
+
+const apostrophePerWord = (comment) => {
+    var iterated = comment.split(' ');
+    var total = 0
+    for (let tmp of iterated){
+        if (tmp.indexOf('\'') >= 0){
+            total++;
+        }
+    }
+    return total/iterated.length
 }
 
 
@@ -198,6 +161,7 @@ const numberOfWordsPerComment = (comment) => {
     }
     return words / amount
 }
+
 
 
 
@@ -250,3 +214,4 @@ exports.numberOfWordsPerComment = numberOfWordsPerComment
 exports.containsPunc = containsPunc
 
 exports.newLines = newLines
+exports.apostrophePerWord = apostrophePerWord

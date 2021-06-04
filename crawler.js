@@ -20,6 +20,8 @@ class Crawler {
           
         this.lookupName = username;
     }
+
+
     
 
    async loadComms(value) {
@@ -27,10 +29,12 @@ class Crawler {
 
         let list = this.mainGuy.getUser(this.lookupName).getComments()
         let comments = await list;
+        let votes = [];
         let temp = [];
         
         for (var i = 0; i < comments.length; i++) {
             temp.push(comments[i].body)
+            votes.push((comments[i]).score)
                 
         }
 

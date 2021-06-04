@@ -1,7 +1,7 @@
 const crawler = require('./crawler')
 const analyze = require('./analyze');
 
-const crawl = new crawler('JuicyJay');
+const crawl = new crawler('spez');
 
 var posts, scr;
 
